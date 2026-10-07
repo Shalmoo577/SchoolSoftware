@@ -1,0 +1,27 @@
+
+.fee-head-page {
+    padding: 20px;
+    background: #f5f6f8;
+    min-height: 100vh;
+}
+
+.fee-head-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.fee-head-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.fee-head-toolbar {
+    margin-bottom: 15px;
+    max-width: 450px;
+}
+
+.fee-head-toolbar .ant-input {
+    height: 40px;
+}

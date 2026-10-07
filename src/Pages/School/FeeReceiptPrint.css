@@ -1,0 +1,328 @@
+.receipt-page {
+    min-height: 100vh;
+    padding: 20px;
+    background: #f5f5f5;
+}
+
+.receipt-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.fee-receipt {
+    width: 210mm;
+    min-height: 148mm;
+    margin: 0 auto;
+    background: #fff;
+    padding: 8mm;
+    box-sizing: border-box;
+    border: 1px solid #000;
+}
+
+/* ============================================
+   COMPANY
+============================================ */
+
+.company-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+}
+
+.company-logo {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+.company-info {
+    flex: 1;
+}
+
+.company-info h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.company-info > div {
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.company-contact {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   TITLE
+============================================ */
+
+.receipt-title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #000;
+    padding: 5px;
+    margin: 8px 0;
+}
+
+/* ============================================
+   RECEIPT META
+============================================ */
+
+.receipt-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid #000;
+}
+
+.receipt-meta > div {
+    padding: 5px;
+    font-size: 10px;
+    border-bottom: 1px solid #000;
+}
+
+.receipt-meta > div:nth-child(odd) {
+    border-right: 1px solid #000;
+}
+
+.receipt-meta strong {
+    margin-right: 5px;
+}
+
+/* ============================================
+   SECTION
+============================================ */
+
+.section-heading {
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    background: #eee;
+    border: 1px solid #000;
+    border-top: none;
+    padding: 4px;
+}
+
+/* ============================================
+   STUDENT
+============================================ */
+
+.student-info {
+    border: 1px solid #000;
+    border-top: none;
+}
+
+.info-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid #000;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row > div {
+    padding: 5px;
+    font-size: 10px;
+}
+
+.info-row > div:first-child {
+    border-right: 1px solid #000;
+}
+
+.info-row strong {
+    margin-right: 5px;
+}
+
+/* ============================================
+   PAYMENT TABLE
+============================================ */
+
+.payment-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+}
+
+.payment-table th,
+.payment-table td {
+    border: 1px solid #000;
+    padding: 5px;
+}
+
+.payment-table th {
+    text-align: center;
+    font-weight: bold;
+}
+
+.payment-table th:last-child,
+.payment-table td:last-child {
+    width: 30%;
+}
+
+.amount {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.right {
+    text-align: right;
+}
+
+.balance-row td {
+    font-weight: bold;
+}
+
+.received-row td {
+    font-size: 12px;
+}
+
+/* ============================================
+   PAYMENT INFO
+============================================ */
+
+.payment-information {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid #000;
+    border-top: none;
+}
+
+.payment-information > div {
+    padding: 5px;
+    font-size: 10px;
+}
+
+.payment-information > div:first-child {
+    border-right: 1px solid #000;
+}
+
+.payment-information strong {
+    margin-right: 5px;
+}
+
+/* ============================================
+   REMARKS
+============================================ */
+
+.remarks {
+    border: 1px solid #000;
+    border-top: none;
+    padding: 5px;
+    font-size: 10px;
+}
+
+.remarks strong {
+    margin-right: 5px;
+}
+
+/* ============================================
+   AMOUNT
+============================================ */
+
+.amount-words {
+    margin-top: 8px;
+    padding: 6px;
+    border: 1px solid #000;
+    font-size: 11px;
+    text-align: center;
+}
+
+.amount-words span {
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+/* ============================================
+   SIGNATURE
+============================================ */
+
+.signature-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 25px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.signature-line {
+    border-top: 1px solid #000;
+    margin-bottom: 4px;
+}
+
+/* ============================================
+   FOOTER
+============================================ */
+
+.receipt-footer {
+    text-align: center;
+    font-size: 8px;
+    margin-top: 15px;
+}
+
+/* ============================================
+   LOADING / ERROR
+============================================ */
+
+.receipt-loading {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.receipt-error {
+    padding: 40px;
+    text-align: center;
+}
+
+/* ============================================
+   PRINT
+============================================ */
+
+@media print {
+
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+
+    html,
+    body {
+        width: 210mm;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .receipt-page {
+        padding: 0;
+        margin: 0;
+        min-height: auto;
+        background: #fff;
+    }
+
+    .fee-receipt {
+        width: 210mm;
+        min-height: 148mm;
+        margin: 0;
+        padding: 8mm;
+        border: 1px solid #000;
+        box-sizing: border-box;
+        page-break-inside: avoid;
+    }
+}

@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    color: black;
+}
+/* const accountTypes = [
+    {
+      id: 1,
+      category: 'Assets',
+      type: 'Balance Sheet',
+      normalBalance: 'Debit',
+      badgeColor: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400',
+      balanceBadge: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+      icon: <Wallet className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
+      detail: 'Business ke zati asasa-jat (Resources owned)',
+      examples: ['Cash in Hand', 'Bank Accounts', 'Accounts Receivable', 'Inventory', 'Machinery']
+    },
+    {
+      id: 2,
+      category: 'Liabilities',
+      type: 'Balance Sheet',
+      normalBalance: 'Credit',
+      badgeColor: 'bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-400',
+      balanceBadge: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400',
+      icon: <Landmark className="w-5 h-5 text-rose-600 dark:text-rose-400" />,
+      detail: 'Business par wajib-ul-ada wajibaat (Debts owed)',
+      examples: ['Accounts Payable', 'Short-term Loans', 'Tax Payable', 'Accrued Expenses']
+    },
+    {
+      id: 3,
+      category: 'Equity',
+      type: 'Balance Sheet',
+      normalBalance: 'Credit',
+      badgeColor: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-400',
+      balanceBadge: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400',
+      icon: <PieChart className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
+      detail: "Owner ka capital aur business ki net worth",
+      examples: ["Owner's Capital", 'Retained Earnings', 'Share Capital', 'Drawings']
+    },
+    {
+      id: 4,
+      category: 'Revenue / Income',
+      type: 'Profit & Loss',
+      normalBalance: 'Credit',
+      badgeColor: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400',
+      balanceBadge: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400',
+      icon: <TrendingUp className="w-5 h-5 text-amber-600 dark:text-amber-400" />,
+      detail: 'Business ki hone wali aamdani (Earnings)',
+      examples: ['Sales Revenue', 'Service Income', 'Discount Received', 'Interest Income']
+    },
+    {
+      id: 5,
+      category: 'Expenses',
+      type: 'Profit & Loss',
+      normalBalance: 'Debit',
+      badgeColor: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400',
+      balanceBadge: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+      icon: <Receipt className="w-5 h-5 text-orange-600 dark:text-orange-400" />,
+      detail: 'Business chalane ke ikhrajat (Operating costs)',
+      examples: ['Office Rent', 'Salaries & Wages', 'Electricity Bill', 'Marketing Expense']
+    }
+  ]; */

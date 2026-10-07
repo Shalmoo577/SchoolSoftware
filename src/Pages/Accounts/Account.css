@@ -1,0 +1,150 @@
+/* =========================================================
+   BANK PAYMENT 2 - ANT DESIGN TABLE
+========================================================= */
+
+.bank-payment-table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.bank-payment-table .ant-table-wrapper {
+    width: 100%;
+}
+
+
+/* =========================================================
+   TABLE CONTAINER
+========================================================= */
+
+.bank-payment-table .ant-table-container {
+    width: 100%;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.bank-payment-table .ant-table-thead > tr > th {
+    font-weight: 600;
+    white-space: nowrap;
+    background: #6d6161 !important;
+    color: white;
+}
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.bank-payment-table .ant-table-tbody > tr > td {
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.bank-payment-table
+.ant-table-tbody
+> tr:hover
+> td {
+    background: #acaaaa !important;
+}
+
+
+/* =========================================================
+   SELECTED / EDIT ROW
+========================================================= */
+
+.bank-payment-table
+.selected-row
+> td {
+    background-color: #26689b !important;
+    color: #f7f7f7;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.bank-payment-table .ant-pagination {
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.container-history .ant-input {
+    height: 38px;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.bank-payment-table .ant-btn {
+    border-radius: 4px;
+}
+
+
+/* =========================================================
+   SORT ARROW
+========================================================= */
+
+.bank-payment-table
+.ant-table-column-sorter {
+    color: #555;
+}
+
+
+/* =========================================================
+   FIXED RIGHT ACTION COLUMN
+========================================================= */
+
+.bank-payment-table
+.ant-table-cell-fix-right {
+    background: #fff;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.bank-payment-table
+.ant-table-body::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+
+.bank-payment-table
+.ant-table-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+.bank-payment-table
+.ant-table-body::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 5px;
+}
+
+
+.bank-payment-table
+.ant-table-body::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}

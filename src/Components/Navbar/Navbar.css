@@ -1,0 +1,113 @@
+.side-bar{
+    width: 300px;
+    /* height: 100vh; */
+    background-color: rgb(9, 31, 51);
+    color: white;
+    padding: 0;
+    margin: 0;
+     flex-shrink: 0;
+     min-height: 100vh;
+     
+}
+main{
+    flex: 1;
+    width: 0;
+    padding: 20px;
+}
+.mai h5{
+    margin: 20px;
+    
+}
+.main-container{
+display: flex;
+ width: 100%;
+min-height: 100vh;
+}
+.user-details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.user-details img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+
+}
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.title.hide{
+    display: none;
+}
+.side-bar .toggle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.toggle {
+    /* background: none;
+    border: none; */
+    font-size: 20px;
+    margin-top: 20px;
+    position: relative;
+    
+    
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50);
+   
+}
+.toggle .jb:hover{
+    /* display: flex   ;
+    align-items: center;
+    justify-content: center; */
+    cursor: pointer;
+    background-color:rgb(61, 77, 92);
+    
+}
+
+.side-bar.hide{
+    width: 90px;
+    
+}
+.navb{
+    /* flex: column;
+    border-radius: 4px;
+    transition: all 0.4ms ease; */
+    
+}
+.navb.hide{
+    display: none;
+}
+.navb ul li{
+    position: relative;
+    color:white;
+    font-weight: 500;
+    gap: 20px;
+    list-style: none;
+    line-height: 40px;
+    
+}
+
+.navb ul li a{
+    color: white;
+    transition: all 1s; 
+    white-space: nowrap;
+    border-radius: 12px;
+    display: flex;
+    text-decoration: none;
+}
+.navb ul li a:hover{
+    color: var(--white-color);
+    background-color: #120531;
+}
+
+.side-icon{
+    font-size: 20px;
+}

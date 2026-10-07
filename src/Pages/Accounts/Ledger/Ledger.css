@@ -1,0 +1,273 @@
+.ledger-page {
+    /* padding: 20px; */
+    width: 100%;
+}
+
+.ledger-filter-card {
+    margin-bottom: 5px;
+}
+
+.ledger-account-card {
+    margin-bottom: 10px;
+}
+
+.ledger-opening-card {
+    margin-bottom: 10px;
+}
+
+.ledger-table-card {
+    margin-bottom: 5px;
+}
+
+.ledger-total-card {
+    margin-bottom: 20px;
+}
+
+.ledger-total-value {
+    font-size: 20px;
+    font-weight: 600;
+    /* margin-top: 5px; */
+}
+/* =========================================
+   PRINT TABLE
+   ========================================= */
+
+.ledger-print-table {
+    display: none;
+}
+
+
+/* =========================================
+   PRINT
+   ========================================= */
+
+@media print {
+
+    @page {
+   size: A4 portrait;
+    margin: 10mm;
+    }
+
+
+    /* -----------------------------------------
+       Hide normal screen elements
+       ----------------------------------------- */
+
+    .ledger-filter-card,
+    .ledger-account-card,
+    .ledger-opening-card,
+    .ledger-table-card {
+        display: none !important;
+    }
+
+
+    .ledger-page > .ant-typography {
+        display: none !important;
+        
+    }
+
+
+    .ant-layout-sider,
+    .sidebar,
+    .navbar,
+    nav {
+        display: none !important;
+    }
+
+
+    button {
+        display: none !important;
+    }
+
+
+    /* -----------------------------------------
+       Page
+       ----------------------------------------- */
+
+    .ledger-page {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+
+    /* -----------------------------------------
+       Print Header
+       ----------------------------------------- */
+
+    .ledger-print-header {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+
+    .ledger-print-header h1 {
+        margin: 0;
+        font-size: 22px;
+    }
+
+
+    .ledger-print-header h2 {
+        margin: 4px 0;
+        font-size: 17px;
+    }
+
+
+    .ledger-print-header p {
+        margin: 2px 0;
+        font-size: 11px;
+    }
+
+
+    /* -----------------------------------------
+       PRINT TABLE
+       ----------------------------------------- */
+
+    .ledger-print-table {
+        display: block !important;
+        /* width: 100% !important;
+        overflow: visible !important; */
+    }
+
+
+    .ledger-print-table table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        table-layout: fixed !important;
+        font-size: 11px !important;
+    }
+
+
+    .ledger-print-table th,
+    .ledger-print-table td {
+        border: 1px solid #000 !important;
+        padding: 5px 6px !important;
+        color: #000 !important;
+        vertical-align: middle !important;
+    }
+
+
+    .ledger-print-table th {
+        font-weight: bold !important;
+        text-align: center !important;
+        background: #fff !important;
+    }
+
+
+    /* -----------------------------------------
+       Column widths
+       ----------------------------------------- */
+
+    .ledger-print-table th:nth-child(1),
+    .ledger-print-table td:nth-child(1) {
+        width: 14%;
+    }
+
+
+    .ledger-print-table th:nth-child(2),
+    .ledger-print-table td:nth-child(2) {
+        width: 14%;
+    }
+
+
+    .ledger-print-table th:nth-child(3),
+    .ledger-print-table td:nth-child(3) {
+        width: 34%;
+        text-align: left !important;
+    }
+
+
+    .ledger-print-table th:nth-child(4),
+    .ledger-print-table td:nth-child(4) {
+        width: 13%;
+        text-align: right !important;
+    }
+
+
+    .ledger-print-table th:nth-child(5),
+    .ledger-print-table td:nth-child(5) {
+        width: 13%;
+        text-align: right !important;
+    }
+
+
+    .ledger-print-table th:nth-child(6),
+    .ledger-print-table td:nth-child(6) {
+        width: 16%;
+        text-align: right !important;
+    }
+
+
+    /* -----------------------------------------
+       Opening Row
+       ----------------------------------------- */
+
+    .ledger-print-table .opening-row {
+        font-weight: normal;
+    }
+
+
+    /* -----------------------------------------
+       Totals
+       ----------------------------------------- */
+
+    .ledger-print-table tfoot td {
+        font-weight: bold !important;
+    }
+
+
+    /* -----------------------------------------
+       Prevent text from breaking badly
+       ----------------------------------------- */
+
+    .ledger-print-table td {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+}/* =========================================
+   LEDGER PRINT HEADER
+   ========================================= */
+
+.ledger-print-header {
+    display: none;
+}
+
+@media print {
+
+    .ledger-print-header {
+        display: block;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .print-company-profile h1 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .print-company-profile {
+        font-size: 11px;
+        line-height: 1.5;
+        margin-bottom: 8px;
+    }
+
+    .print-ledger-title {
+        margin: 8px 0 2px;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: start;
+        
+    }
+
+    .print-account-name {
+        margin: 2px 0 10px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: start;
+    }
+}

@@ -1,0 +1,645 @@
+const express = require("express");
+const mysql = require("mysql2/promise");
+const cors = require("cors");
+
+
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const db = mysql.createPool({
+    host: "localhost",
+    user: "root",
+
+    password: "",
+    database: "management",
+    port: 3306
+});
+
+// Fetching Control Account for General account
+app.get("/api/Generalaccount", async (req, res) => {
+    try {
+
+        const [rows] = await db.query(`
+            SELECT ControlAccountID, ControlAccountName
+            FROM controlaccount
+        `);
+
+        res.json(rows);
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            message: "Database error",
+            error: error.message
+        });
+    }
+});
+
+/// Saving head of account
+
+
+
+  
+
+// Gowdown Saving backend server.js 
+app.post("/api/checkGowdownName", async (req, res) => {
+
+    const {
+        warehousename,
+        phonenumber,
+        address,
+        remarks
+    } = req.body;
+
+    console.log("Received data:", req.body);
+
+    // Validate warehouse name
+    if (!warehousename || !warehousename.trim()) {
+        return res.status(400).json({
+            message: "Warehouse name is required."
+        });
+    }
+
+    const sql = `
+        INSERT INTO gowdown
+        (GOWDOWN_NAME, PHONE_NUMBER, ADDRESS, REMARKS)
+        VALUES (?, ?, ?, ?)
+    `;
+
+    try {
+
+        const [result] = await db.query(
+            sql,
+            [
+                warehousename.trim(),
+                phonenumber || null,
+                address || null,
+                remarks || null
+            ]
+        );
+
+        console.log("Inserted Successfully:", result);
+
+        return res.status(200).json({
+            message: "Data Saved Successfully",
+            id: result.insertId
+        });
+
+    } catch (error) {
+
+        console.error("MYSQL ERROR:", error);
+
+        return res.status(500).json({
+            message: "Database Error",
+            error: error.message
+        });
+    }
+});
+
+// Fetching General Accounts
+// app.get("/api/accounts", async (req, res) => {
+//     try {
+
+//         const [rows] = await db.query(`
+//             SELECT AccountTypeID, AccountType
+//             FROM accounttypes
+//         `);
+
+//         res.json(rows);
+
+//     } catch (error) {
+
+//         console.log(error);
+
+//         res.status(500).json({
+//             message: "Database error",
+//             error: error.message
+//         });
+//     }
+// });
+
+    app.listen(5000, () => {
+    console.log("Server running on http://localhost:5000");
+});
+
+/// getting warehouse from db for item page
+
+app.get("/api/gowdownList", async (req, res) => {
+    try {
+
+        const sql = `  
+            SELECT Gowdown_Id, Gowdown_Name
+            FROM gowdown  `;
+
+        const [rows] = await db.query(sql);
+        res.status(200).json(rows);
+
+    } catch (error) {
+
+        console.log("My Sql Error:" , error );
+
+        res.status(500).json({
+            message: "Database error",
+            error: error.message
+        });
+    }
+});
+// Saving Item
+app.post("/api/Saving_Item", async (req, res) => {
+
+    console.log("1. ROUTE STARTED");
+
+    try {
+
+        console.log("2. BODY:", req.body);
+
+        const tb_item = req.body.tb_item;
+        const tb_select_warehouse = req.body.tb_select_warehouse;
+        const tb_remarks = req.body.tb_remarks;
+
+        console.log("3. tb_item:", tb_item);
+        console.log("4. warehouse:", tb_select_warehouse);
+        console.log("5. remarks:", tb_remarks);
+
+        const sql = `
+            INSERT INTO ITEM
+            (Item_Name, Gowdown, Remarks)
+            VALUES (?, ?, ?)
+        `;
+
+        console.log("6. SQL CREATED");
+
+        const values = [
+            tb_item,
+            tb_select_warehouse,
+            tb_remarks || null
+        ];
+
+        console.log("7. VALUES:", values);
+
+        const [result] = await db.query(sql, values);
+
+        console.log("8. INSERT RESULT:", result);
+
+        res.status(200).json({
+            success: true,
+            message: "Data Saved Successfully",
+            id: result.insertId
+        });
+
+    } catch (error) {
+
+        console.error("========== ERROR ==========");
+        console.error(error);
+        console.error("MESSAGE:", error.message);
+        console.error("CODE:", error.code);
+        console.error("===========================");
+
+        res.status(500).json({
+            success: false,
+            message: error.message,
+            code: error.code
+        });
+    }
+});
+
+// Saving P.P.bags
+    app.post("/api/SavingPPBags" , async (req , res)=>{
+        console.log("Route Started");
+        try {
+            console.log("Body Required");
+            const tb_bagsize = req.body.tb_bagsize;
+            const tb_brandname = req.body.tb_brandname;
+            const tb_kg = req.body.tb_kg;
+            const tb_remarks = req.body.tb_remarks;
+
+            console.log("tb_bagsize =" , tb_bagsize  )
+            console.log("tb_brandname =" , tb_brandname  )
+            console.log("tb_kg =" , tb_kg  )
+            console.log("tb_remarks =" , tb_remarks  )
+
+            const sql = `insert into PPBAGS (PP_BAG_SIZE ,PP_BAG_BRAND,	PP_BAG_KG,	REMARKS	) values(?,?,?,?)`;
+            console.log("Sql Create");
+            
+            const values = [tb_bagsize , tb_brandname, tb_kg , tb_remarks];
+            console.log("Values =" , values);
+
+            const [result] = await db.query(sql,values);
+            console.log("Insert Result =" , result);
+
+            res.status(200).json({
+                success: true,
+                message: "Data Save Successfully",
+                id: result.insertId
+            });
+
+
+        } catch (error) {
+        console.error("========== ERROR ==========");
+        console.error(error);
+        console.error("MESSAGE:", error.message);
+        console.error("CODE:", error.code);
+        console.error("===========================");
+        res.status(500).json({
+            success: false,
+            message: error.message,
+            code: error.code
+        });
+
+        }
+    })        
+//End Saving bags
+
+/// saving hoa 
+
+// Get HOA List
+app.get("/api/hoa", async (req, res) => {
+    try {
+
+        const sql = `
+            SELECT hoa_id, hoa_name
+            FROM HOA
+        `;
+
+        const [rows] = await db.query(sql);
+
+        res.status(200).json(rows);
+
+    } catch (error) {
+
+        console.error("HOA FETCH ERROR:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Database error",
+            error: error.message
+        });
+    }
+});
+
+//Saving Control account
+app.post("/api/SavingControlAccount", async (req, res) => {
+    console.log("Received data:", req.body);
+
+    try {
+        const {hoa, controlaccount } = req.body;
+
+        const sql = `
+            INSERT INTO controlaccounts (hoa_id, ControlAccountName)
+            VALUES (?, ?)
+        `;
+
+        const values = [hoa, controlaccount];
+
+        const [result] = await db.query(sql, values);
+
+        console.log("Insert Result:", result);
+
+        res.status(200).json({
+            success: true,
+            message: "Saved Successfully",
+            id: result.insertId
+        });
+
+    } catch (error) {
+
+        console.error("========== ERROR ==========");
+        console.error(error);
+        console.error("MESSAGE:", error.message);
+        console.error("CODE:", error.code);
+        console.error("===========================");
+
+        res.status(500).json({
+            success: false,
+            message: error.message,
+            code: error.code
+        });
+    }
+});
+
+/// Fetching Data for Table
+app.get("/api/control-accounts", async (req, res) => {
+    try {
+
+        const sql = `
+            SELECT
+                ca.ControlAccountID,
+                ca.hoa_id,
+                h.hoa_name,
+                ca.ControlAccountName
+            FROM controlaccounts ca
+            LEFT JOIN HOA h
+                ON h.hoa_id = ca.hoa_id
+            ORDER BY ca.ControlAccountID DESC
+        `;
+
+        const [rows] = await db.query(sql);
+
+        res.json(rows);
+
+    } catch (error) {
+
+        console.error("CONTROL ACCOUNT FETCH ERROR:", error);
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+});
+/// for edit Control Account
+app.put("/api/control-accounts/:id", async (req, res) => {
+
+    try {
+
+        const { id } = req.params;
+
+        const {
+            hoa,
+            controlaccount
+        } = req.body;
+
+
+        if (!hoa) {
+
+            return res.status(400).json({
+                success: false,
+                message: "HOA is required."
+            });
+
+        }
+
+
+        if (!controlaccount || !controlaccount.trim()) {
+
+            return res.status(400).json({
+                success: false,
+                message: "Control Account Name is required."
+            });
+
+        }
+
+
+        const sql = `
+            UPDATE controlaccounts
+
+            SET
+                hoa_id = ?,
+                ControlAccountName = ?
+
+            WHERE ControlAccountID = ?
+        `;
+
+
+        const [result] = await db.query(
+            sql,
+            [
+                hoa,
+                controlaccount.trim(),
+                id
+            ]
+        );
+
+
+        if (result.affectedRows === 0) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Control Account not found."
+            });
+
+        }
+
+
+        res.json({
+            success: true,
+            message: "Control Account Updated Successfully."
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "CONTROL ACCOUNT UPDATE ERROR:",
+            error
+        );
+
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+});
+// For General Account Fetching
+app.get("/api/general-accounts", async (req, res) => {
+    try {
+
+        const sql = `
+           SELECT ga.General_Account_Id,  ga.General_Account_Name FROM Generalaccount ga
+            LEFT JOIN controlaccounts c ON c.controlaccountid = ga.Control_Account_Id;
+            
+        `;
+
+        const [rows] = await db.query(sql);
+
+        res.json(rows);
+
+    } catch (error) {
+
+        console.error("GENERAL ACCOUNTS FETCH ERROR:", error);
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+});
+// Save Subsidary Account
+app.post("/api/SaveSA", async (req, res) => {
+    console.log("Received data:", req.body);
+
+    try {
+        const {
+             tb_generalaccount,
+              tb_subsidaryaccount,
+              tb_type,
+              tb_dr,
+              tb_cr,
+              tb_remarks,
+        } = req.body;
+
+        const sql = `
+            INSERT INTO subsidaryaccount (Ga_ID , SA_Name ,Type, Dr, Cr ,Remarks)
+            VALUES (?, ? ,?, ? ,?, ?  )
+        `;
+
+        const values = [ tb_generalaccount, tb_subsidaryaccount, tb_type, tb_dr, tb_cr, tb_remarks,];
+
+        const [result] = await db.query(sql, values);
+
+        console.log("Insert Result:", result);
+
+        res.status(200).json({
+            success: true,
+            message: "Saved Successfully",
+            id: result.insertId
+        });
+
+    } catch (error) {
+
+        console.error("========== ERROR ==========");
+        console.error(error);
+        console.error("MESSAGE:", error.message);
+        console.error("CODE:", error.code);
+        console.error("===========================");
+
+        res.status(500).json({
+            success: false,
+            message: error.message,
+            code: error.code
+        });
+    }
+});
+/// for edit subsidary account
+
+app.put("/api/subsidary-accounts/:id", async (req, res) => {
+
+    try {
+
+        const { id } = req.params;
+
+        const {
+              tb_generalaccount,
+              tb_subsidaryaccount,
+              tb_type,
+              tb_dr,
+              tb_cr,
+              tb_remarks,
+        } = req.body;
+
+
+        if (!tb_subsidaryaccount) {
+
+            return res.status(400).json({
+                success: false,
+                message: "Subsidary Account is required."
+            });
+
+        }
+
+
+        if (!tb_generalaccount || !tb_generalaccount.trim()) {
+
+            return res.status(400).json({
+                success: false,
+                message: "General Account Name is required."
+            });
+
+        }
+
+
+        const sql = `
+            UPDATE subsidaryaccount
+
+            SET
+                Ga_ID = ?,
+                Sa_Name = ?,
+                type = ?,
+                Dr = ?,
+                Cr = ?,
+                remarks = ?
+            WHERE SA_ID = ?
+        `;
+
+
+        const [result] = await db.query(
+            sql,
+            [
+
+              tb_generalaccount.trim(),
+              tb_subsidaryaccount,
+              tb_type.trim(),
+              tb_dr,
+              tb_cr,
+              tb_remarks,
+              id
+            ]
+        );
+
+
+        if (result.affectedRows === 0) {
+
+            return res.status(404).json({
+                success: false,
+                message: "General Account not found."
+            });
+
+        }
+
+
+        res.json({
+            success: true,
+            message: "Subsidary Account Updated Successfully."
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Subsidary ACCOUNT UPDATE ERROR:",
+            error
+        );
+
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+});
+
+/// Fetching Data for Table Subsidary account
+app.get("/api/table", async (req, res) => {
+    try {
+
+        const sql = `
+    SELECT
+                sa.Sa_ID,
+                sa.Ga_ID,
+                ga.General_Account_name,
+                sa.Sa_Name,
+                sa.type,
+                sa.dr,
+                sa.cr,
+                sa.remarks
+            FROM subsidaryaccount sa
+            LEFT JOIN generalaccount ga
+                ON ga.General_Account_Id = sa.Ga_Id
+            ORDER BY sa.Sa_ID DESC
+        `;
+
+        const [rows] = await db.query(sql);
+
+        res.json(rows);
+
+    } catch (error) {
+
+        console.error("CONTROL ACCOUNT FETCH ERROR:", error);
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+});

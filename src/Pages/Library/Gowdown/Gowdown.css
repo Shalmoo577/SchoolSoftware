@@ -1,0 +1,13 @@
+/* Highlight currently editing row */
+.control-table tbody tr.selected-row {
+    background-color: #fff3cd !important;
+    box-shadow: inset 4px 0 0 #ffc107;
+}
+
+.control-table tbody tr.selected-row td {
+    background-color: #fff3cd !important;
+}
+
+.control-table tbody tr.selected-row:hover td {
+    background-color: #ffe8a1 !important;
+}

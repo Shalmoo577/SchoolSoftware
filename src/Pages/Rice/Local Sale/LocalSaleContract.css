@@ -1,0 +1,16 @@
+.btn-set{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    top: 0;
+    bottom: 10px;
+}
+
+form input{
+    text-transform: uppercase;
+}
+#allownce{
+    background-color: rgb(238, 235, 235);
+    
+}

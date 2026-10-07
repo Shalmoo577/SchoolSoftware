@@ -1,0 +1,38 @@
+.student-page {
+    padding: 20px;
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.student-card {
+    margin-bottom: 20px;
+}
+
+.student-table-card {
+    margin-top: 20px;
+}
+
+.student-card .ant-card-head-title,
+.student-table-card .ant-card-head-title {
+    font-weight: 600;
+}
+
+.student-card .ant-form-item {
+    margin-bottom: 16px;
+}
+s
+.student-page .ant-table {
+    background: #fff;
+}
+
+.student-page .ant-table-thead > tr > th {
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+
+    .student-page {
+        padding: 10px;
+    }
+
+}

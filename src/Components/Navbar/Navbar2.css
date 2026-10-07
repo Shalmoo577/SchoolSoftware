@@ -1,0 +1,99 @@
+.wrapper {
+    display: flex;
+    height: calc(100vh - 60px);
+    width: 100%;
+    overflow: auto
+    ;
+}
+
+/* Normal Sidebar */
+.sidebar {
+    width: 300px;
+    /* min-width: 300px; */
+    flex-shrink: 0;
+    height: 100vh;
+    background-color: #0878f9;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    
+}
+
+/* Collapsed Sidebar */
+.sidebar.collapsed {
+    width: 65px;
+}
+
+/* Sidebar links */
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 15px;
+    white-space: nowrap;
+}
+
+/* Hover */
+.sidebar a:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Menu heading */
+.sidebar h5 {
+    white-space: nowrap;
+}
+
+/* Arrow */
+.arrow {
+    float: right;
+    transition: 0.3s;
+}
+
+.arrow.rotate {
+    transform: rotate(90deg);
+}
+
+/* Submenu */
+.submenu {
+    background-color: #0067d8;
+}
+
+.submenu a {
+    padding-left: 40px;
+}
+
+/* Content */
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 25px;
+    /* overflow-x: auto; */
+    width: 100%;
+}
+.sidebar.collapsed h5 {
+    font-size: 0;
+}
+
+.sidebar.collapsed h5:first-letter {
+    font-size: 20px;
+}
+
+.sidebar.collapsed a {
+    font-size: 0;
+    text-align: center;
+    padding: 12px 0;
+}
+
+.sidebar.collapsed a:first-letter {
+    font-size: 20px;
+}
+
+.sidebar.collapsed .arrow {
+    display: none;
+}
+
+.sidebar.collapsed .submenu {
+    display: none;
+}
+.line{
+    border: 1px solid  rgb(49, 109, 238);
+}
