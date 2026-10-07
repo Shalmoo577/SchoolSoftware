@@ -1,11 +1,14 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 
 import SARouter from '../Pages/Accounts/Parents Account/SARouter.js'
 import GowdownRouter from '../backend/Router/GowdownRouter.js'
 // import BPRouter from '../backend/Router/BPRouter.js'
 import GARouter from '../backend/Router/GARouter.js'
-import HoaRouter from  '../backend/Router/HoaRouter.js'
+import HoaRouter from '../backend/Router/HoaRouter.js'
 import CARouter from '../backend/Router/CARouter.js'
 import ItemRouter from './Router/ItemRouter.js'
 import PPBagRouter from './Router/PPBagRouter.js'
@@ -24,13 +27,13 @@ import Teachers from './Router/School Router/TeacherRouter.js'
 import periodRouter from './Router/School Router/periodRouter.js'
 import StudentRouter from './Router/School Router/StudentRouter.js'
 
-import FeeHeadRouter  from './Router/School Router/FeeHeadRouter.js'
-import FeeStructureRouter  from './Router/School Router/FeeStructureRouter.js'
-import StudentFeeRouter   from './Router/School Router/StudentFeeRouter.js'
+import FeeHeadRouter from './Router/School Router/FeeHeadRouter.js'
+import FeeStructureRouter from './Router/School Router/FeeStructureRouter.js'
+import StudentFeeRouter from './Router/School Router/StudentFeeRouter.js'
 import FeeTypeRouter from './Router/School Router/FeeTypeRouter.js'
 import ClassFeeVoucherRouter from './Router/School Router/ClassFeeVoucherRouter.js'
 import StudentFeeVoucherRouter from './Router/School Router/StudentFeeVoucherRouter.js'
-import FeeReceiptRouter  from './Router/School Router/FeeReceiptRouter.js'
+import FeeReceiptRouter from './Router/School Router/FeeReceiptRouter.js'
 import OutstandingFeeReportRouter from './Router/School Router/OutstandingFeeReportRouter.js'
 import FeeCollectionReportRouter from './Router/School Router/FeeCollectionReportRouter.js'
 import FeeReceiptPrint from './Router/School Router/FeeReceiptRouter.js'
@@ -48,22 +51,28 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(uppercaseMiddleware);
-app.use("/api", LedgerRouter);
-// Routes
 
- app.use("/api", GowdownRouter);
- app.use("/api/" , SARouter);
-app.use("/api/" , GARouter);
-app.use("/api/" , HoaRouter);
-// app.use("/api/" , BPRouter);
-app.use("/api/" , CARouter);
-app.use("/api/" , ItemRouter);
-app.use("/api/" , PPBagRouter);
- app.use("/api/" , BankPaymentRouter2);
+
+// ======================================================
+// API ROUTES
+// ======================================================
+
+app.use("/api", LedgerRouter);
+
+app.use("/api", GowdownRouter);
+app.use("/api", SARouter);
+app.use("/api", GARouter);
+app.use("/api", HoaRouter);
+// app.use("/api", BPRouter);
+app.use("/api", CARouter);
+app.use("/api", ItemRouter);
+app.use("/api", PPBagRouter);
+app.use("/api", BankPaymentRouter2);
 app.use("/api", CompanyProfileRouter);
 app.use("/api", BankReceiptRouter);
 app.use("/api", CashPayment);
 app.use("/api", CashReceipt);
+
 app.use("/api", CampusRouter);
 app.use("/api", SubjectRouter);
 app.use("/api", TimeTableRouter);
@@ -72,15 +81,17 @@ app.use("/api", Teachers);
 app.use("/api", periodRouter);
 app.use("/api", StudentRouter);
 app.use("/api", AcademicYearRouter);
-app.use("/api", FeeHeadRouter );
-app.use("/api", FeeStructureRouter );
-app.use("/api", StudentFeeRouter );
-app.use("/api", FeeTypeRouter );
-app.use("/api", ClassFeeVoucherRouter );
-app.use("/api", StudentFeeVoucherRouter );
+
+app.use("/api", FeeHeadRouter);
+app.use("/api", FeeStructureRouter);
+app.use("/api", StudentFeeRouter);
+app.use("/api", FeeTypeRouter);
+app.use("/api", ClassFeeVoucherRouter);
+app.use("/api", StudentFeeVoucherRouter);
 app.use("/api", FeeReceiptRouter);
 app.use("/api", OutstandingFeeReportRouter);
 app.use("/api", FeeCollectionReportRouter);
+
 app.use("/api", PageRouter);
 app.use("/api", PermissionRouter);
 app.use("/api", DeveloperSetupRouter);
@@ -89,13 +100,65 @@ app.use("/api", UserRouter);
 app.use("/api", SectionRouter);
 app.use("/api", JournalVoucherRouter);
 
-// app.use("/api", FeeReceiptPrint );
+// app.use("/api", FeeReceiptPrint);
 
+
+// ======================================================
+// SERVE REACT / VITE FRONTEND
+// ======================================================
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// server.js is inside:
+// src/backend/server.js
+//
+// dist is at:
+// project-root/dist
+
+const distPath = path.resolve(__dirname, "../../dist");
+
+console.log("DIST PATH:", distPath);
+// Serve static React files
+app.use(express.static(distPath));
+console.log(
+    "INDEX EXISTS:",
+    fs.existsSync(path.join(distPath, "index.html"))
+);
+app.get("/", (req, res) => {
+    res.sendFile(path.join(distPath, "index.html"));
+});
+
+// React Router fallback
+// API routes are NOT affected
+app.use((req, res, next) => {
+
+    if (
+        req.method === "GET" &&
+        !req.path.startsWith("/api")
+    ) {
+
+        return res.sendFile(
+            path.join(distPath, "index.html")
+        );
+
+    }
+
+    next();
+
+});
+
+
+// ======================================================
+// SERVER
+// ======================================================
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server is Running on Port ${PORT}`);
 });
+
+console.log("SERVER FILE LOADED");
 
 export default app;
